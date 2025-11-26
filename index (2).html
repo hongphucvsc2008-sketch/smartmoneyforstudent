@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SmartMoney for Students</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1120;
+      --primary: #2563eb;
+      --primary-soft: rgba(37, 99, 235, 0.15);
+      --accent: #facc15;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --card-bg: #020617;
+      --border-subtle: rgba(148, 163, 184, 0.25);
+      --radius-xl: 18px;
+      --shadow-lg: 0 24px 48px rgba(15, 23, 42, 0.65);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #0f172a 0, #020617 55%, #000 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 4.5rem 0 3.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 1.6rem;
+    }
+
+    .section-kicker {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    h2.section-title {
+      font-size: clamp(1.6rem, 2vw + 1rem, 2.1rem);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.96rem;
+      color: var(--muted);
+      max-width: 620px;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(
+        to bottom,
+        rgba(15, 23, 42, 0.95),
+        rgba(15, 23, 42, 0.7),
+        transparent
+      );
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-weight: 600;
+      font-size: 0.98rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .nav-brand span.logo-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0%, #fbbf24, #f97316);
+      box-shadow: 0 0 24px rgba(248, 250, 252, 0.5);
+      font-size: 0.9rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.86rem;
+    }
+
+    .nav-link {
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition:
+        color 0.18s ease,
+        background 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.12s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text);
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.5);
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+    .hero {
+      padding: 3.5rem 0 3.5rem;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.3fr);
+      gap: 2.4rem;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.12rem 0.5rem 0.12rem 0.18rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      margin-bottom: 1.1rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    .eyebrow-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 0%, #22c55e, #16a34a);
+      font-size: 0.9rem;
+    }
+
+    .eyebrow span.label {
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+    }
+
+    .hero-title {
+      font-size: clamp(2.25rem, 3vw + 1rem, 2.9rem);
+      line-height: 1.12;
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+      letter-spacing: 0.03em;
+    }
+
+    .hero-highlight {
+      background: linear-gradient(to right, #e5e7eb, #93c5fd);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero-text {
+      font-size: 0.98rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 0.7rem;
+    }
+
+    .hero-author {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.7rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      padding: 0.65rem 1.2rem;
+      transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.12s ease,
+        box-shadow 0.12s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #f9fafb;
+      box-shadow: 0 16px 35px rgba(37, 99, 235, 0.55);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 20px 40px rgba(37, 99, 235, 0.7);
+    }
+
+    .btn-ghost {
+      background: rgba(15, 23, 42, 0.9);
+      color: var(--text);
+      border-color: rgba(148, 163, 184, 0.5);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15, 23, 42, 1);
+      border-color: rgba(248, 250, 252, 0.6);
+      transform: translateY(-1px);
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-meta span.dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.8);
+    }
+
+    /* Hero card */
+    .hero-card {
+      position: relative;
+      border-radius: 22px;
+      background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.2), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(250, 204, 21, 0.14), transparent 60%),
+        #020617;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      padding: 1.35rem 1.4rem;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+    }
+
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.32rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-badge span.dot-pill {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.3);
+    }
+
+    .hero-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-card span.sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .hero-card ul {
+      list-style: none;
+      margin-top: 0.75rem;
+      font-size: 0.83rem;
+    }
+
+    .hero-card li {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 0.35rem;
+      color: #e5e7eb;
+    }
+
+    .hero-card li::before {
+      content: "";
+      margin-top: 0.5rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #38bdf8;
+      flex-shrink: 0;
+    }
+
+    .hero-card-footer {
+      margin-top: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.12rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    /* CARD GRID */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      position: relative;
+      padding: 1rem 1rem 1.2rem;
+      border-radius: var(--radius-xl);
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 55%),
+        var(--card-bg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.55);
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        border-color 0.16s ease,
+        background 0.16s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.8);
+      border-color: rgba(96, 165, 250, 0.8);
+      background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.22), transparent 60%),
+        var(--card-bg);
+    }
+
+    .card-header {
+      display: flex;
+      gap: 0.55rem;
+      align-items: center;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      background: radial-gradient(circle at 30% 0, #22c55e, #0ea5e9);
+    }
+
+    .card-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 0.86rem;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .card ul {
+      padding-left: 1rem;
+      font-size: 0.83rem;
+      color: var(--text);
+    }
+
+    .card ul li {
+      margin-bottom: 0.28rem;
+    }
+
+    /* Learn more links */
+    .more-link {
+      display: inline-block;
+      margin-top: 0.45rem;
+      font-size: 0.8rem;
+      color: #93c5fd;
+    }
+
+    .more-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Two column */
+    .two-column {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.2fr);
+      gap: 1.3rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+
+    .pill {
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: rgba(15, 23, 42, 0.9);
+    }
+
+    footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 1.5rem 0 1.8rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      background: #020617;
+    }
+
+    footer span.brand {
+      font-weight: 600;
+      color: #e5e7eb;
+    }
+
+    @media (max-width: 880px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+
+      section {
+        padding: 3.4rem 0 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header>
+    <div class="container nav">
+      <div class="nav-brand">
+        <span class="logo-mark">💡</span>
+        <span>SmartMoney for Students</span>
+      </div>
+      <nav class="nav-menu">
+        <a class="nav-link" href="#lessons">Lessons</a>
+        <a class="nav-link" href="#mentors">Mentors</a>
+        <a class="nav-link" href="#tools">Tools</a>
+        <a class="nav-link" href="#games">Games</a>
+        <a class="nav-link" href="#community">Community</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="eyebrow">
+          <span class="eyebrow-pill">✓</span>
+          <span class="label">Capstone project</span>
+          <span>Financial literacy for high school students</span>
+        </div>
+
+        <h1 class="hero-title">
+          Build real-life money skills
+          <span class="hero-highlight">before graduation.</span>
+        </h1>
+
+        <p class="hero-text">
+          SmartMoney for Students turns boring money topics into short, interactive
+          lessons. Learn how to budget, save, use credit, invest, and understand
+          your paycheque — using examples that actually fit student life.
+        </p>
+
+        <p class="hero-author">
+          Capstone by <strong>Hong Phuc Le (Henry Le)</strong>, Eric Hamber Secondary School
+        </p>
+
+        <div class="hero-actions">
+          <a href="#lessons" class="btn btn-primary">
+            Start with Budgeting
+          </a>
+          <a href="#tools" class="btn btn-ghost">
+            Explore Money Tools
+          </a>
+        </div>
+
+        <div class="hero-meta">
+          <span>8 core topics • 10–15 minutes each</span>
+          <span class="dot"></span>
+          <span>Designed to support Career Life Connections</span>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Budget preview">
+        <div class="card-badge">
+          <span class="dot-pill"></span>
+          Live preview · Monthly budget
+        </div>
+        <div>
+          <h3>Plan Before You Spend</h3>
+          <span class="sub">Example: $200/month from a part-time job</span>
+        </div>
+
+        <ul>
+          <li>Track where your money comes from and where it goes.</li>
+          <li>Use the 50/30/20 rule: 50% needs, 30% wants, 20% future goals.</li>
+          <li>If you earn $200, save $40 first and plan the rest with intention.</li>
+        </ul>
+
+        <div class="hero-card-footer">
+          <span>Next up: Saving • Credit • Taxes</span>
+          <span class="tag-chip">Student-friendly language</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- LESSONS -->
+  <section id="lessons">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">Interactive learning lessons</p>
+        <h2 class="section-title">Core money topics, made simple</h2>
+        <p class="section-subtitle">
+          Each lesson includes clear definitions, real-life examples, and
+          step-by-step instructions. Students can move at their own pace and
+          complete quick reflection questions at the end.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <!-- Budgeting -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">📋</div>
+            <h3 class="card-title">Budgeting – Plan Before You Spend</h3>
+          </header>
+          <p>A budget shows how much money you have and where it goes.</p>
+          <ul>
+            <li>Learn the 50/30/20 rule for needs, wants, and goals.</li>
+            <li>Use apps or a notebook to track every expense.</li>
+            <li>Example activity: Create a one-month budget for $200 income.</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.canada.ca/en/financial-consumer-agency/services/make-budget.html"
+             target="_blank" rel="noopener">
+            Learn more about making a budget (Government of Canada)
+          </a>
+        </article>
+
+        <!-- Saving -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">💰</div>
+            <h3 class="card-title">Saving – Keep Money for the Future</h3>
+          </header>
+          <p>Saving means not spending all your money right away.</p>
+          <ul>
+            <li>"Pay yourself first" – save before you spend on anything else.</li>
+            <li>Open a savings account to earn interest.</li>
+            <li>Aim to save 10–20% of your income each month.</li>
+          </ul>
+          <a class="more-link"
+             href="https://publications.gc.ca/collections/collection_2013/acfc-fcac/FC5-29-2012-eng.pdf"
+             target="_blank" rel="noopener">
+            Tips to save money while you're at school (PDF, FCAC)
+          </a>
+        </article>
+
+        <!-- Credit -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">💳</div>
+            <h3 class="card-title">Credit &amp; Debt – Borrow Smart</h3>
+          </header>
+          <p>Credit is borrowed money you must repay, usually with interest.</p>
+          <ul>
+            <li>Understand what a credit score is and why on-time payments matter.</li>
+            <li>Learn why paying only the minimum balance makes debt grow fast.</li>
+            <li>Example: See how $100 at 20% interest becomes $120 quickly.</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.canada.ca/en/financial-consumer-agency/services/credit-reports-score.html"
+             target="_blank" rel="noopener">
+            Learn how credit reports and scores work (Government of Canada)
+          </a>
+        </article>
+
+        <!-- Banking -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">🏦</div>
+            <h3 class="card-title">Banking – Keep Your Money Safe</h3>
+          </header>
+          <p>Know the difference between chequing accounts and savings accounts.</p>
+          <ul>
+            <li>Chequing: for everyday spending using a debit card.</li>
+            <li>Savings: for longer-term goals and earning interest.</li>
+            <li>Protect your PIN, and learn to read your monthly bank statement.</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.canada.ca/en/financial-consumer-agency/services/banking.html"
+             target="_blank" rel="noopener">
+            Learn more about banking basics (Government of Canada)
+          </a>
+        </article>
+
+        <!-- Smart spending -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">🛒</div>
+            <h3 class="card-title">Smart Spending – Make Good Choices</h3>
+          </header>
+          <p>Choose value over impulse buying.</p>
+          <ul>
+            <li>Compare prices and ask, “Do I need this or just want it?”</li>
+            <li>See how small, daily purchases add up over time.</li>
+            <li>Example: $5 coffee × 20 days = $100 that could go to savings.</li>
+          </ul>
+          <a class="more-link"
+             href="https://abclifeliteracy.ca/news/smart-shopping-strategies-how-to-save-money-without-sacrificing-quality/"
+             target="_blank" rel="noopener">
+            Smart shopping strategies for saving money
+          </a>
+        </article>
+
+        <!-- Investing -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">📈</div>
+            <h3 class="card-title">Investing – Grow Your Money</h3>
+          </header>
+          <p>Investing means putting money into something to make more.</p>
+          <ul>
+            <li>Learn about risk versus reward using simple examples.</li>
+            <li>Understand compound interest and why starting early matters.</li>
+            <li>Example: Investing $100/month from age 18 can grow a lot by age 40.</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.canada.ca/en/financial-consumer-agency/services/savings-investments/investing-basics.html"
+             target="_blank" rel="noopener">
+            Basics of investing (Government of Canada)
+          </a>
+          <br />
+          <a class="more-link"
+             href="https://www.ciro.ca/office-investor/guides-investors/youth-guide-finance-and-investing"
+             target="_blank" rel="noopener">
+            Youth guide to finance and investing (CIRO)
+          </a>
+        </article>
+
+        <!-- Goals -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">🎯</div>
+            <h3 class="card-title">Financial Goals – Plan for Success</h3>
+          </header>
+          <p>Turn big dreams into step-by-step action plans.</p>
+          <ul>
+            <li>Set SMART goals: Specific, Measurable, Achievable, Realistic, Time-based.</li>
+            <li>Break large goals into weekly or monthly mini-goals.</li>
+            <li>Example: Save $600 in 6 months by saving $100 each month.</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.canada.ca/en/financial-consumer-agency/services/savings-investments/savings-investment-goals.html"
+             target="_blank" rel="noopener">
+            How to set savings and investment goals
+          </a>
+          <br />
+          <a class="more-link"
+             href="https://itools-ioutils.fcac-acfc.gc.ca/FGC-COF/home-accueil-eng.aspx"
+             target="_blank" rel="noopener">
+            Try the Financial Goal Calculator
+          </a>
+        </article>
+
+        <!-- Taxes -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">🧾</div>
+            <h3 class="card-title">Taxes &amp; Paycheques – Know Your Earnings</h3>
+          </header>
+          <p>Understand your pay stub and where your deductions go.</p>
+          <ul>
+            <li>Gross pay = total before deductions; net pay = take-home pay.</li>
+            <li>Learn what CPP, EI, and income tax are for.</li>
+            <li>Example: $500 gross − $50 deductions = $450 net pay.</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.getsmarteraboutmoney.ca/learning-path/understanding-tax/understanding-the-tax-deductions-on-your-pay-stub/"
+             target="_blank" rel="noopener">
+            Understand tax deductions on your pay stub
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTORS -->
+  <section id="mentors">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">Finance in real life</p>
+        <h2 class="section-title">Mentor stories &amp; youth-friendly design</h2>
+        <p class="section-subtitle">
+          Students see how money decisions show up in real university life and
+          in business. The website uses a modern design so everything feels
+          familiar, like a social media app instead of a textbook.
+        </p>
+      </div>
+
+      <div class="two-column">
+        <!-- Mentor stories -->
+        <div class="card">
+          <header class="card-header">
+            <div class="card-icon">🎓</div>
+            <h3 class="card-title">University Graduate – Smart Student Budgeting</h3>
+          </header>
+          <p>
+            A finance graduate shares posts and short videos about managing money in
+            university: avoiding debt, budgeting for tuition, and saving for
+            textbooks and rent.
+          </p>
+          <ul>
+            <li>Real example: an international student opening their first bank account and learning to track expenses at university.</li>
+            <li>Stories about adjusting from living at home to paying for residence, transit, and food on a student budget.</li>
+            <li>Reflection question: “What would your first-year budget look like?”</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.torontomu.ca/international/admissions/student-blog/2025/07/trial-error-how-i-learned-to-save-and-budget/"
+             target="_blank" rel="noopener">
+            Read a real story: “How I learned to save and budget” (Toronto Metropolitan University)
+          </a>
+          <br />
+          <a class="more-link"
+             href="https://alis.alberta.ca/explore-education-and-training/pay-for-your-education/read-student-stories-about-paying-for-school/"
+             target="_blank" rel="noopener">
+            More student stories about paying for school (ALIS Alberta)
+          </a>
+        </div>
+
+        <div class="card">
+          <header class="card-header">
+            <div class="card-icon">📊</div>
+            <h3 class="card-title">Business Director – Money at Work</h3>
+          </header>
+          <p>
+            A business director explains how financial knowledge is used to run a
+            real company: tracking profit, managing cash flow, and making
+            investment decisions.
+          </p>
+          <ul>
+            <li>Connects classroom topics like budgeting and saving to real jobs and promotions.</li>
+            <li>Shows how young adults use multiple income sources and intentional budgeting to reach big savings goals.</li>
+            <li>Mentor Q&amp;A: students can submit questions for future videos.</li>
+          </ul>
+          <a class="more-link"
+             href="https://stories.td.com/ca/en/article/student-finances"
+             target="_blank" rel="noopener">
+            Read how 3 university students manage money (TD Stories)
+          </a>
+          <br />
+          <a class="more-link"
+             href="https://people.com/high-schooler-creates-bedazzled-piggy-bank-to-save-money-only-one-person-knows-the-code-and-its-not-her-exclusive-11686739"
+             target="_blank" rel="noopener">
+            Viral story: high schooler’s creative savings plan for college
+          </a>
+        </div>
+      </div>
+
+      <div style="height: 1.2rem;"></div>
+
+      <div class="two-column">
+        <!-- Youth-friendly -->
+        <div class="card">
+          <header class="card-header">
+            <div class="card-icon">📱</div>
+            <h3 class="card-title">Modern, mobile-first layout</h3>
+          </header>
+          <p>
+            The site is fully responsive, so students can use it on phones,
+            tablets, or laptops. Navigation is clean and simple, with a clear
+            progress bar for each topic.
+          </p>
+          <ul>
+            <li>Short sections — perfect for 10-minute sessions.</li>
+            <li>Large tap targets and clear labels.</li>
+            <li>Dark theme that reduces eye strain during evening study.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <header class="card-header">
+            <div class="card-icon">🎨</div>
+            <h3 class="card-title">Friendly visuals &amp; clear language</h3>
+          </header>
+          <p>
+            Bright icons, emoji, and simple diagrams make complex topics easy to
+            understand without overwhelming students.
+          </p>
+          <ul>
+            <li>Key vocabulary highlighted in tooltips and side notes.</li>
+            <li>Short animations show how interest and compound growth work.</li>
+            <li>Plain-English explanations designed for ELL students.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section id="tools">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">Real-life money tools</p>
+        <h2 class="section-title">Turn lessons into real decisions</h2>
+        <p class="section-subtitle">
+          Interactive tools help students test “what if?” situations and see
+          how small changes in their habits affect long-term results.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <!-- Budget planner -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">📊</div>
+            <h3 class="card-title">Budget Planner</h3>
+          </header>
+          <p>Students enter their income and expenses to see a visual breakdown.</p>
+          <ul>
+            <li>Pie chart of money going to needs, wants, and savings.</li>
+            <li>Slider to adjust spending and instantly see the impact.</li>
+            <li>Downloadable summary for CLC or portfolio evidence.</li>
+          </ul>
+          <a class="more-link"
+             href="https://itools-ioutils.fcac-acfc.gc.ca/BP-PB/budget-planner"
+             target="_blank" rel="noopener">
+            Use the Government of Canada Budget Planner
+          </a>
+        </article>
+
+        <!-- Savings goal -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">🌱</div>
+            <h3 class="card-title">Savings Goal Calculators</h3>
+          </header>
+          <p>Helps students plan for goals like a new phone, laptop, or trip.</p>
+          <ul>
+            <li>Example goal: “Save $500 for a laptop in 6 months.”</li>
+            <li>Shows how much to save weekly or monthly.</li>
+            <li>Graphs how savings grow over time.</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.mydoh.ca/tools/savings-goal-calculator-for-kids/"
+             target="_blank" rel="noopener">
+            Try a youth-friendly savings goal calculator (Mydoh)
+          </a>
+          <br />
+          <a class="more-link"
+             href="https://www.investor.gov/financial-tools-calculators/calculators/savings-goal-calculator"
+             target="_blank" rel="noopener">
+            Advanced savings goal calculator (Investor.gov)
+          </a>
+        </article>
+
+        <!-- Credit & interest -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">⏰</div>
+            <h3 class="card-title">Credit &amp; Interest Tools</h3>
+          </header>
+          <p>Visualizes what happens when payments are late or only the minimum.</p>
+          <ul>
+            <li>Side-by-side comparison: paying in full vs. minimum only.</li>
+            <li>Graph showing total interest paid over time.</li>
+            <li>Connects directly to lessons on credit cards and debt.</li>
+          </ul>
+          <a class="more-link"
+             href="https://itools-ioutils.fcac-acfc.gc.ca/FGC-COF/home-accueil-eng.aspx"
+             target="_blank" rel="noopener">
+            Explore the Financial Goal &amp; Debt Calculator (FCAC)
+          </a>
+          <br />
+          <a class="more-link"
+             href="https://www.canada.ca/en/services/finance/tools.html"
+             target="_blank" rel="noopener">
+            More financial tools &amp; calculators (Government of Canada)
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- GAMES -->
+  <section id="games">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">Games &amp; mini-challenges</p>
+        <h2 class="section-title">Learn by doing, not just reading</h2>
+        <p class="section-subtitle">
+          Gamified missions, quizzes, and digital certificates keep students
+          engaged and give teachers simple ways to assess learning.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <!-- Money challenges -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">🎮</div>
+            <h3 class="card-title">Online Money Challenges</h3>
+          </header>
+          <p>Short, realistic missions that tie directly into each topic.</p>
+          <ul>
+            <li>“Save $20 per week for one month and log your progress.”</li>
+            <li>“Track every expense for 7 days and categorize each one.”</li>
+            <li>“Compare two products and choose the smarter purchase.”</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.ngpf.org/arcade/"
+             target="_blank" rel="noopener">
+            Play free financial literacy games in the NGPF Arcade
+          </a>
+        </article>
+
+        <!-- Games list -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">🏅</div>
+            <h3 class="card-title">Featured Money Games</h3>
+          </header>
+          <p>Use existing, classroom-tested games to make lessons more fun.</p>
+          <ul>
+            <li><strong>STAX</strong> – fast-paced game that teaches investing basics.</li>
+            <li><strong>Time for Payback</strong> – choose how to pay for college and manage debt.</li>
+            <li><strong>Shady Sam</strong> – shows how predatory lenders make money.</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.edutopia.org/article/10-free-financial-literacy-games-high-school-students/"
+             target="_blank" rel="noopener">
+            See a list of 10 free financial literacy games (Edutopia)
+          </a>
+        </article>
+
+        <!-- Offline / Canadian options -->
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">❓</div>
+            <h3 class="card-title">Conversation Cards &amp; Offline Games</h3>
+          </header>
+          <p>Not every activity has to be on a screen. Use printable games and cards to start money talks.</p>
+          <ul>
+            <li>Money question cards to spark discussions at home or in class.</li>
+            <li>Scenario cards about saving, spending, and borrowing choices.</li>
+            <li>Group challenges where teams design a budget or savings plan.</li>
+          </ul>
+          <a class="more-link"
+             href="https://www.bankofcanadamuseum.ca/learn/activities/"
+             target="_blank" rel="noopener">
+            Download money activities &amp; games (Bank of Canada Museum)
+          </a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY -->
+  <section id="community">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-kicker">Community &amp; support</p>
+        <h2 class="section-title">Build a culture of smart money habits</h2>
+        <p class="section-subtitle">
+          SmartMoney for Students creates a space where learners can share real
+          stories, ask questions, and celebrate financial wins — together.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">🗣️</div>
+            <h3 class="card-title">Student Story Hub</h3>
+          </header>
+          <p>Students submit short posts about how they saved or met a goal.</p>
+          <ul>
+            <li>Examples: “My first paycheque,” “How I paid off my phone.”</li>
+            <li>Option to upload screenshots of budgets or savings trackers.</li>
+            <li>Encourages peer-to-peer learning and reflection.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">First paycheque</span>
+            <span class="pill">Paid-off debt</span>
+            <span class="pill">Emergency fund</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">💬</div>
+            <h3 class="card-title">Discussion Board</h3>
+          </header>
+          <p>A moderated space for questions, advice, and teacher prompts.</p>
+          <ul>
+            <li>Weekly prompts on budgeting, scholarships, and side hustles.</li>
+            <li>Anonymous option so shy students can still participate.</li>
+            <li>Teachers can highlight strong answers as “featured tips”.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">Budget tips</span>
+            <span class="pill">Scholarships</span>
+            <span class="pill">Part-time jobs</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <header class="card-header">
+            <div class="card-icon">📧</div>
+            <h3 class="card-title">Monthly Money Newsletter</h3>
+          </header>
+          <p>Fresh content keeps students and families up to date.</p>
+          <ul>
+            <li>Topics like “Best apps for saving money” or “How to read your first pay stub.”</li>
+            <li>Links back to lessons and tools inside the website.</li>
+            <li>Great way for teachers to communicate with caregivers.</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">New lessons</span>
+            <span class="pill">Challenge of the month</span>
+            <span class="pill">Success stories</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>
+        <span class="brand">SmartMoney for Students</span> · Capstone financial-literacy
+        website for high school learners.
+      </p>
+      <p>
+        Created by <strong>Hong Phuc Le (Henry Le)</strong>,
+        Eric Hamber Secondary School.
+      </p>
+      <p>Designed to support Career Life Education &amp; Career Life Connections outcomes.</p>
+    </div>
+  </footer>
+</body>
+</html>
